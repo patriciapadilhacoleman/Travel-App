@@ -1,10 +1,4 @@
 # trip.py contains the class and the behaviors of a trip
-
-
-from pickle import NONE
-from types import NoneType
-
-
 class Trip:
     def __init__(self, title, budget=0):
         self.title = title
@@ -22,6 +16,9 @@ class Trip:
 
 
 class BussinessTrip(Trip):
+    def __init__(self, title, budget, company):
+        Trip.__init__(self, title, budget)
+        self.company = company
 
     def getCompany(self):
         company = input('Enter Company Name: ')
@@ -34,6 +31,18 @@ class BussinessTrip(Trip):
             return'[Trip:%s, %s, %s]' % (self.title, self.budget, self.company)
         else:
             return Trip.__repr__(self)
+
+
+class MonthlyTrips:
+    def __init__(self, *args):
+        self.members = list(args)
+
+    def addMembers(self, trip):
+        self.memebers.append(trip)
+
+    def showAll(self):
+        for trip in self.members:
+            print(trip)
 
 
 if __name__ == '__main__':
@@ -49,9 +58,19 @@ if __name__ == '__main__':
     print(rio)
     thai.printDestinations()
     print(thai)
-    paris = BussinessTrip('Paris', 5000)
+    paris = BussinessTrip('Paris', 5000, 'GM')
+    turkey = BussinessTrip('Turkey', 400, 'MS')
     paris.getCompany()
     print(paris)
-    print('--- All Three ---')
-    for obj in (paris, thai, rio):
-        print(obj)
+    print('--- All ---')
+    # for obj in (paris, thai, rio, turkey):
+    #     print(obj)
+
+    peru = Trip("Peru")
+    london = Trip("London", 300)
+
+    january = MonthlyTrips(rio, thai, turkey)
+    february = MonthlyTrips(paris, peru, london)
+
+    january.showAll()
+    february.showAll()
