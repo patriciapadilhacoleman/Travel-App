@@ -51,7 +51,8 @@ class MonthlyTrips:
     def showAll(self):
         print(self.name)
         for trip in self.members:
-            print(trip)
+            print(trip.__class__.__name__)
+            print(trip.__dict__.keys())
 
 
 if __name__ == '__main__':
